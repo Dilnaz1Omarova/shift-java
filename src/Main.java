@@ -7,6 +7,14 @@ public class Main {
         List<Double> floats = new ArrayList<>();
         List<String> strings = new ArrayList<>();
 
+        for (String fileName : inputFiles){
+            File file = new File(fileName);
+            if (!file.exists()){
+                System.out.println("File not found: " + fileName);
+                continue;
+            }
+        }
+
         try (BufferedReader reader = new BufferedReader(new FileReader(file))){
             String line;
             while ((line = reader.readLine()) != null){
@@ -26,5 +34,6 @@ public class Main {
             System.out.println("Error reading file");
             e.printStackTrace();
         }
+
     }
 }
