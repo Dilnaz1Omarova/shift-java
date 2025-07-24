@@ -35,5 +35,26 @@ public class Main {
             e.printStackTrace();
         }
 
+
+    }
+
+    private static boolean isInteger(String line){
+        try {
+            Long.parseLong(line);
+            return true;
+        }
+        catch (NumberFormatException e){
+            return false;
+        }
+    }
+
+    private static boolean isFloat(String line){
+        try {
+            Double.parseDouble(line);
+            return line.contains(".");
+        }
+        catch (NumberFormatException e){
+            return false;
+        }
     }
 }
