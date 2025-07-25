@@ -3,12 +3,15 @@ import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
+
+        List<String> inputFiles = new ArrayList<>();
         List<Long> integers = new ArrayList<>();
         List<Double> floats = new ArrayList<>();
         List<String> strings = new ArrayList<>();
 
+        File file = null;
         for (String fileName : inputFiles) {
-            File file = new File(fileName);
+            file = new File(fileName);
             if (!file.exists()) {
                 System.out.println("File not found: " + fileName);
                 continue;
@@ -75,5 +78,6 @@ public class Main {
             }
         }
     }
+
 
 }
