@@ -5,6 +5,36 @@ public class Main {
     public static void main(String[] args) {
 
         List<String> inputFiles = new ArrayList<>();
+        String outputDir = ".";
+        String prefix = "";
+        boolean append = false;
+        boolean fullStats = false;
+        boolean shortStats = false;
+
+        for (int i = 0; i < args.length; i++) {
+            switch (args[i]) {
+                case "-o":
+                    outputDir = args[++i];
+                    break;
+                case "-p":
+                    prefix = args[++i];
+                    break;
+                case "-a":
+                    append = true;
+                    break;
+                case "-f":
+                    fullStats = true;
+                    break;
+                case "-s":
+                    shortStats = true;
+                    break;
+                default:
+                    inputFiles.add(args[i]);
+                    break;
+            }
+        }
+
+
         List<Long> integers = new ArrayList<>();
         List<Double> floats = new ArrayList<>();
         List<String> strings = new ArrayList<>();
@@ -16,6 +46,18 @@ public class Main {
                 System.out.println("File not found: " + fileName);
                 continue;
             }
+        }
+
+        try {
+            if (!integers.isEmpty())
+                writeToFile(outputDir, prefix + "integers.txt", toStringList(integers), append);
+            if (!floats.isEmpty())
+                writeToFile(outputDir, prefix + "floats.txt", toStringList(floats), append);
+            if (!strings.isEmpty())
+                writeToFile(outputDir, prefix + "strings.txt", strings, append);
+        } catch (IOException e) {
+            System.out.println("Error writing output files.");
+            e.printStackTrace();
         }
 
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
