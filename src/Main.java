@@ -33,6 +33,10 @@ public class Main {
                     break;
             }
         }
+        if (!shortStats && !fullStats) {
+            System.out.println("Please choose short stats or full stats");
+            return;
+        }
 
 
         List<Long> integers = new ArrayList<>();
@@ -44,7 +48,6 @@ public class Main {
             file = new File(fileName);
             if (!file.exists()) {
                 System.out.println("File not found: " + fileName);
-                continue;
             }
         }
 
@@ -97,8 +100,6 @@ public class Main {
 
     private static boolean isFloat(String line) {
         try {
-
-
             Double.parseDouble(line);
             return line.contains(".");
         } catch (NumberFormatException e) {
