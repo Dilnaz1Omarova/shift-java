@@ -48,17 +48,6 @@ public class Main {
             }
         }
 
-        try {
-            if (!integers.isEmpty())
-                writeToFile(outputDir, prefix + "integers.txt", toStringList(integers), append);
-            if (!floats.isEmpty())
-                writeToFile(outputDir, prefix + "floats.txt", toStringList(floats), append);
-            if (!strings.isEmpty())
-                writeToFile(outputDir, prefix + "strings.txt", strings, append);
-        } catch (IOException e) {
-            System.out.println("Error writing output files.");
-            e.printStackTrace();
-        }
 
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             String line;
@@ -78,7 +67,17 @@ public class Main {
             e.printStackTrace();
         }
 
-
+        try {
+            if (!integers.isEmpty())
+                writeToFile(outputDir, prefix + "integers.txt", toStringList(integers), append);
+            if (!floats.isEmpty())
+                writeToFile(outputDir, prefix + "floats.txt", toStringList(floats), append);
+            if (!strings.isEmpty())
+                writeToFile(outputDir, prefix + "strings.txt", strings, append);
+        } catch (IOException e) {
+            System.out.println("Error writing output files.");
+            e.printStackTrace();
+        }
 
     }
 
