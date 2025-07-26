@@ -48,28 +48,28 @@ public class Main {
             File file = new File(fileName);
             if (!file.exists()) {
                 System.out.println("File not found: " + fileName);
+                continue;
             }
-        }
 
 
-        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                line = line.trim();
-                if (line.isEmpty()) continue;
-                if (isInteger(line)) {
-                    integers.add(Long.parseLong(line));
-                } else if (isFloat(line)) {
-                    floats.add(Double.parseDouble(line));
-                } else {
-                    strings.add(line);
+            try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    line = line.trim();
+                    if (line.isEmpty()) continue;
+                    if (isInteger(line)) {
+                        integers.add(Long.parseLong(line));
+                    } else if (isFloat(line)) {
+                        floats.add(Double.parseDouble(line));
+                    } else {
+                        strings.add(line);
+                    }
                 }
+            } catch (IOException e) {
+                System.out.println("Error reading file");
+                e.printStackTrace();
             }
-        } catch (IOException e) {
-            System.out.println("Error reading file");
-            e.printStackTrace();
         }
-
         try {
             if (!integers.isEmpty())
                 writeToFile(outputDir, prefix + "integers.txt", toStringList(integers), append);
