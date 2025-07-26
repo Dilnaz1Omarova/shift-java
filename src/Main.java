@@ -79,6 +79,9 @@ public class Main {
             e.printStackTrace();
         }
 
+        if (!integers.isEmpty()) printIntegerStats(integers, fullStats);
+        if (!floats.isEmpty()) printFloatStats(floats, fullStats);
+        if (!strings.isEmpty()) printStringStats(strings, fullStats);
     }
 
     private static boolean isInteger(String line) {
@@ -88,7 +91,9 @@ public class Main {
         } catch (NumberFormatException e) {
             return false;
         }
+
     }
+
 
     private static boolean isFloat(String line) {
         try {
