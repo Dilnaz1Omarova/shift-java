@@ -43,9 +43,9 @@ public class Main {
         List<Double> floats = new ArrayList<>();
         List<String> strings = new ArrayList<>();
 
-        File file = null;
+
         for (String fileName : inputFiles) {
-            file = new File(fileName);
+            File file = new File(fileName);
             if (!file.exists()) {
                 System.out.println("File not found: " + fileName);
             }
