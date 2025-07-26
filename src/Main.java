@@ -79,6 +79,7 @@ public class Main {
         }
 
 
+
     }
 
     private static boolean isInteger(String line) {
@@ -121,5 +122,36 @@ public class Main {
         }
     }
 
+    private static void printIntegerStats(List<Long> list, boolean full) {
+        System.out.println("Integers: " + list.size());
+        if (full) {
+            long min = Collections.min(list);
+            long max = Collections.max(list);
+            long sum = 0;
+            for (long x : list) sum += x;
+            double avg = (double) sum / list.size();
+            System.out.printf("  Min: %d, Max: %d, Sum: %d, Avg: %.2f%n", min, max, sum, avg);
+        }
+    }
 
+    private static void printFloatStats(List<Double> list, boolean full) {
+        System.out.println("Floats: " + list.size());
+        if (full) {
+            double min = Collections.min(list);
+            double max = Collections.max(list);
+            double sum = 0;
+            for (double x : list) sum += x;
+            double avg = sum / list.size();
+            System.out.printf("  Min: %.5f, Max: %.5f, Sum: %.5f, Avg: %.5f%n", min, max, sum, avg);
+        }
+    }
+
+    private static void printStringStats(List<String> list, boolean full) {
+        System.out.println("Strings: " + list.size());
+        if (full) {
+            int minLen = list.stream().mapToInt(String::length).min().orElse(0);
+            int maxLen = list.stream().mapToInt(String::length).max().orElse(0);
+            System.out.printf("  Shortest Length: %d, Longest Length: %d%n", minLen, maxLen);
+        }
+    }
 }
