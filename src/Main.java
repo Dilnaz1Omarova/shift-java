@@ -80,6 +80,7 @@ public class Main {
         } catch (IOException e) {
             System.out.println("Error writing output files.");
             e.printStackTrace();
+
         }
 
         if (!integers.isEmpty()) printIntegerStats(integers, fullStats);
@@ -114,16 +115,24 @@ public class Main {
         }
         return result;
     }
-    private static void writeToFile(String dir, String name, List<String> lines, boolean append) throws IOException {
+    private static void writeToFile(String dir, String name, List<?> lines, boolean append) throws IOException {
         File folder = new File(dir);
-        if (!folder.exists()) folder.mkdirs();
-        File file = new File(folder, name);
+        if (!folder.exists()) {
+            boolean created = folder.mkdirs();
+            if (!created) {
+                System.out.println("Failed to create output directory: " + folder.getAbsolutePath());
+                return;
+            }
+        }
 
+        File file = new File(folder, name);
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(file, append))) {
-            for (String line : lines) {
-                writer.write(line);
+            for (Object line : lines) {
+                writer.write(line.toString());
                 writer.newLine();
             }
+        } catch (IOException e) {
+            System.err.println("Failed to write to file " + file.getAbsolutePath() + ": " + e.getMessage());
         }
     }
 
